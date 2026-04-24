@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 // ─── Edit these to match your setup ──────────────────────────────────────────
 const FROM_ADDRESS   = "Sam Mooney <sam@theideationbureau.com>"  // must be a verified Resend domain
 const REPLY_TO       = "sam@theideationbureau.com"
-const ALLOWED_ORIGIN = "https://nuanced-checkout-246944.framer.app"    // your Framer published URL
+const ALLOWED_ORIGIN = [ "https://nuanced-checkout-246944.framer.app" , "https://theideationbureau.com/" ]   // your Framer published URL
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default async function handler(req, res) {
