@@ -1,0 +1,9 @@
+{
+  "name": "ideation-bureau-email-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "resend": "^3.2.0"
+  }
+}
