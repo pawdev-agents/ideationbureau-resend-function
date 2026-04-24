@@ -2,16 +2,24 @@ import { Resend } from "resend"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// ─── Edit these to match your setup ──────────────────────────────────────────
-const FROM_ADDRESS   = "Sam Mooney <sam@theideationbureau.com>"  // must be a verified Resend domain
-const REPLY_TO       = "sam@theideationbureau.com"
-const ALLOWED_ORIGIN = [ "https://nuanced-checkout-246944.framer.app" , "https://theideationbureau.com/" ]   // your Framer published URL
-// ─────────────────────────────────────────────────────────────────────────────
+const FROM_ADDRESS = "Sam Mooney <sam@theideationbureau.com>"
+const REPLY_TO     = "sam@theideationbureau.com"
+
+const ALLOWED_ORIGINS = [
+    "https://nuanced-checkout-246944.framer.app",
+    "https://theideationbureau.com",
+    "https://www.theideationbureau.com"
+]
 
 export default async function handler(req, res) {
-    res.setHeader("Access-Control-Allow-Origin", ALLOWED_ORIGIN)
+    const origin = req.headers.origin
+
+    if (ALLOWED_ORIGINS.includes(origin)) {
+        res.setHeader("Access-Control-Allow-Origin", origin)
+    }
     res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS")
     res.setHeader("Access-Control-Allow-Headers", "Content-Type")
+    res.setHeader("Vary", "Origin")
 
     if (req.method === "OPTIONS") return res.status(200).end()
     if (req.method !== "POST")   return res.status(405).json({ error: "Method not allowed" })
@@ -41,7 +49,6 @@ export default async function handler(req, res) {
       <td align="center">
         <table width="560" cellpadding="0" cellspacing="0" style="background:#fffdf7;border:1px solid #d9d0bc;max-width:560px;width:100%;">
 
-          <!-- Header bar -->
           <tr>
             <td style="background:#2d1a0e;padding:28px 40px;">
               <p style="margin:0;color:#d4b87a;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;">
@@ -50,7 +57,6 @@ export default async function handler(req, res) {
             </td>
           </tr>
 
-          <!-- Body -->
           <tr>
             <td style="padding:48px 40px 40px;">
               <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:#2d1a0e;">Hey there,</p>
@@ -77,7 +83,6 @@ export default async function handler(req, res) {
             </td>
           </tr>
 
-          <!-- Footer -->
           <tr>
             <td style="border-top:1px solid #d9d0bc;padding:20px 40px;">
               <p style="margin:0;font-size:10px;color:#9a8f7e;letter-spacing:2px;text-transform:uppercase;">
