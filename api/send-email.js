@@ -33,22 +33,25 @@ export default async function handler(req, res) {
             to:      email,
             replyTo: REPLY_TO,
             subject: "Your application to The Ideation Bureau",
-            text: `Hey ${name},
+            text: `Hi ${name},
 
-Thanks for applying to work with The Ideation Bureau.
+I'm Sam, founder of The Ideation Bureau.
 
-Before we move forward, I'd like to get a clearer sense of what you're building.
+Firstly, thanks so much for reaching out. I really appreciate you taking the time to get in touch.
 
-Could you please share:
-– Brand / company name
-– What you're looking to build
-– Timeline
-– Any context you think is important
+Before we jump into ideas, I'd love to understand a little more about what you're building.
 
-Once I have this, I'll review and come back to you with next steps.
+Could you tell me a little more about your project?
+- Brand / company name
+- What are you looking to build?
+- When are you hoping to launch?
+- Anything else you'd like us to know?
+
+
+Once I've had a chance to read through everything, I'll come back to you with the next steps and how I think we can help.
 
 Thanks,
-Sam Mooney`,
+Sam`,
         })
         return res.status(200).json({ success: true })
     } catch (err) {
